@@ -1,0 +1,16 @@
+{
+  "name": "link-checker",
+  "version": "0.0.1",
+  "description": "checks links and https support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "John Teske",
+  "license": "MIT",
+  "dependencies": {
+    "got": "^11.1.3",
+    "prettier": "^2.0.5"
+  }
+}
