@@ -1,11 +1,13 @@
 const got = require("got");
 
+const timeout = 3000
+
 module.exports = (links) =>
   Promise.all(
     links.map(async (url) => {
       const isHttps = url.startsWith("https");
 
-      return got(url, { timeout: 3000 })
+      return got(url, { timeout })
         .then((response) => {
           if (response == null) {
             throw { response: null, error: "no response" };
@@ -22,7 +24,7 @@ module.exports = (links) =>
           if (isHttps) {
             return response;
           }
-          return got(url.replace("http://", "https://"), { timeout: 3000 })
+          return got(url.replace("http://", "https://"), { timeout })
             .then(() => {
               return { ...response, https: "available" };
             })
