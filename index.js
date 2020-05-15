@@ -4,6 +4,6 @@ const checker = require("./checker");
 
 (async () => {
   const stdin = await getStdin();
-  const links = stdin.split(/\s/);
+  const links = stdin.split(/\s/).filter(Boolean);
   await checker(links);
 })();

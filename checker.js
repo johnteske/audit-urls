@@ -7,8 +7,7 @@ const options = {
 
 module.exports = (links) =>
   Promise.all(
-    // filter out empty
-    links.filter(Boolean).map(async (url) => {
+    links.map(async (url) => {
       const isHttps = url.startsWith("https");
 
       let response;
