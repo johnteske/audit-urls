@@ -7,40 +7,36 @@ const options = {
 
 module.exports = (links) =>
   Promise.all(
-    links.map(async (url) => {
+    // filter out empty
+    links.filter(Boolean).map(async (url) => {
       const isHttps = url.startsWith("https");
 
-      return got(url, options)
-        .then((response) => {
-          if (response == null) {
-            throw { response: null, error: "no response" };
-          }
-          const { redirectUrls } = response;
-          const redirect = redirectUrls.length !== 0 ? redirectUrls : null;
-          return {
-            status: response.statusCode,
-            url,
-            redirect,
-          };
-        })
-        .then((response) => {
-          if (isHttps) {
-            return response;
-          }
-          return got(url.replace("http://", "https://"), options)
-            .then(() => {
-              return { ...response, https: "available" };
-            })
-            .catch(() => ({ ...response, https: "no" }));
-        })
-        .catch((err) => {
-          const { response } = err;
-          // should this match the above?
-          if (response == null) {
-            return { url };
-          }
-          return { status: err.response.statusCode, url };
-        });
+      let response;
+      try {
+        response = await got(url, options);
+      } catch (err) {
+        const _error = err.response == null ? err.code : null;
+        return {
+          url,
+          error: _error,
+          status: err.response && err.response.statusCode,
+        };
+      }
+
+      let https = null;
+      if (!isHttps) {
+        https = await got(url.replace("http://", "https://"), options)
+          .then(() => "available")
+          .catch(() => "no");
+      }
+
+      return {
+        url,
+        status: response.statusCode,
+        redirect:
+          response.redirectUrls.length !== 0 ? response.redirectUrls : null,
+        https,
+      };
     })
   ).then((values) => {
     values.forEach((v) => {
