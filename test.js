@@ -20,7 +20,7 @@ test("404", async (t) => {
 
 test("no response", async (t) => {
   const res = await getStatus("https://hopefully-not-a-real-site.com");
-  t.equal(res.error, "ECONNREFUSED")
+  t.assert(res.error != null)
 })
 
 test("invalid url", async (t) => {
