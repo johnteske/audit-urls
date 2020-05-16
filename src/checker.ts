@@ -5,6 +5,14 @@ const options = {
   retry: 0,
 };
 
+interface LinkStatus {
+  url: string;
+  error?: string;
+  status?: number;
+  redirect?: string[];
+  https?: "available" | "no";
+}
+
 module.exports = (links) =>
   Promise.all(
     links.map(async (url) => {
@@ -38,9 +46,9 @@ module.exports = (links) =>
       };
     })
   ).then((values) => {
-    values.forEach((v) => {
+    values.forEach((v: LinkStatus) => {
       const { url } = v;
-      const msgs = ["error", "https", "status", "redirect"]
+      const msgs = ["error", "status", "https", "redirect"]
         .filter((key) => v[key] != null)
         .map((key) =>
           key === "redirect"
