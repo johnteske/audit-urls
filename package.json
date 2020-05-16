@@ -1,7 +1,7 @@
 {
-  "name": "check-urls",
+  "name": "audit-urls",
   "version": "0.0.1",
-  "description": "checks links and https support",
+  "description": "audit url statuses, including https availability",
   "main": "dist/index.js",
   "bin": {
     "check-urls": "./dist/cli.js"
