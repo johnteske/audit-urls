@@ -1,6 +1,6 @@
 const test = require("tape-promise/tape");
 
-const { getStatus } = require("./dist/checker");
+const { getStatus } = require("./dist");
 
 test("200", async (t) => {
   const res = await getStatus("https://johnteskemusic.com");
