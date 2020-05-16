@@ -41,33 +41,33 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
-var _this = this;
 var got = require("got");
 var options = {
     timeout: 3000,
     retry: 0
 };
-module.exports = function (links) {
-    return Promise.all(links.map(function (url) { return __awaiter(_this, void 0, void 0, function () {
+function getStatus(url) {
+    var _a;
+    return __awaiter(this, void 0, void 0, function () {
         var isHttps, response, err_1, _error, https;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     isHttps = url.startsWith("https");
-                    _a.label = 1;
+                    _b.label = 1;
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
+                    _b.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, got(url, options)];
                 case 2:
-                    response = _a.sent();
+                    response = _b.sent();
                     return [3 /*break*/, 4];
                 case 3:
-                    err_1 = _a.sent();
+                    err_1 = _b.sent();
                     _error = err_1.response == null ? err_1.code : null;
                     return [2 /*return*/, {
                             url: url,
                             error: _error,
-                            status: err_1.response && err_1.response.statusCode
+                            status: (_a = err_1.response) === null || _a === void 0 ? void 0 : _a.statusCode
                         }];
                 case 4:
                     https = null;
@@ -75,8 +75,8 @@ module.exports = function (links) {
                     return [4 /*yield*/, got(url.replace("http://", "https://"), options)
                             .then(function () { return "available"; })["catch"](function () { return "no"; })];
                 case 5:
-                    https = _a.sent();
-                    _a.label = 6;
+                    https = _b.sent();
+                    _b.label = 6;
                 case 6: return [2 /*return*/, {
                         url: url,
                         status: response.statusCode,
@@ -85,17 +85,21 @@ module.exports = function (links) {
                     }];
             }
         });
-    }); })).then(function (values) {
-        values.forEach(function (v) {
-            var url = v.url;
-            var msgs = ["error", "status", "https", "redirect"]
-                .filter(function (key) { return v[key] != null; })
-                .map(function (key) {
-                return key === "redirect"
-                    ? v.redirect.map(function (r) { return "redirect: " + r; }).join("\n\t")
-                    : key + ": " + v[key];
-            });
-            console.log(__spreadArrays([url], msgs).join("\n\t"));
-        });
+    });
+}
+function formatStatus(v) {
+    var url = v.url;
+    var msgs = ["error", "status", "https", "redirect"]
+        .filter(function (key) { return v[key] != null; })
+        .map(function (key) {
+        return key === "redirect"
+            ? v.redirect.map(function (r) { return "redirect: " + r; }).join("\n\t")
+            : key + ": " + v[key];
+    });
+    console.log(__spreadArrays([url], msgs).join("\n\t"));
+}
+module.exports = function (links) {
+    return Promise.all(links.map(getStatus)).then(function (statuses) {
+        statuses.forEach(formatStatus);
     });
 };

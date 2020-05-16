@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "tsc src/*.ts --declaration --outDir dist",
-    "format": "prettier **/*.js --write",
-    "test": "echo \"http://johnteskemusic.com https://johnteskemusic.com/about.php https://hope-4-404.site badurl\" | node dist/index.js"
+    "format": "prettier src/*.ts --write",
+    "test": "echo \"http://johnteskemusic.com https://johnteskemusic.com/about.php https://hopefully-not-a.site badurl\" | node dist/index.js"
   },
   "keywords": [],
   "author": "John Teske",
