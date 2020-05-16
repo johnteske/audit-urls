@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc src/*.ts --declaration --outDir dist",
     "format": "prettier src/*.ts --write",
-    "test": "echo \"http://johnteskemusic.com https://johnteskemusic.com/about.php https://hopefully-not-a.site badurl\" | node dist/index.js"
+    "test": "tape test.js"
   },
   "keywords": [],
   "author": "John Teske",
@@ -17,6 +17,8 @@
   "dependencies": {
     "got": "^11.1.3",
     "prettier": "^2.0.5",
+    "tape": "^5.0.0",
+    "tape-promise": "^4.0.0",
     "typescript": "^3.9.2"
   }
 }
