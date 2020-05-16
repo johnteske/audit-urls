@@ -1,4 +1,4 @@
-module.exports = async () => {
+export default async function getStdin() {
   let result = "";
 
   process.stdin.setEncoding("utf8");

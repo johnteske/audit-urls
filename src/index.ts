@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const getStdin = require("./get-stdin");
-const checker = require("./checker");
+import getStdin from "./get-stdin";
+import checker from "./checker";
 
 (async () => {
   const stdin = await getStdin();

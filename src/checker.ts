@@ -1,4 +1,4 @@
-const got = require("got");
+import got from "got"
 
 const options = {
   timeout: 3000,
@@ -13,7 +13,7 @@ type LinkStatus = {
   https?: "available" | "no";
 };
 
-async function getStatus(url) {
+export async function getStatus(url) {
   const isHttps = url.startsWith("https");
 
   let response;
@@ -55,7 +55,7 @@ function formatStatus(v: LinkStatus) {
   console.log([url, ...msgs].join("\n\t"));
 }
 
-module.exports = (links) =>
+export default (links) =>
   Promise.all(links.map(getStatus)).then((statuses) => {
     statuses.forEach(formatStatus);
   });
