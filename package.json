@@ -1,14 +1,17 @@
 {
-  "name": "link-checker",
+  "name": "check-urls",
   "version": "0.0.1",
   "description": "checks links and https support",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "bin": {
+    "check-urls": "./dist/cli.js"
+  },
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc src/*.ts --declaration --outDir dist",
-    "format": "prettier src/*.ts --write",
+    "build": "tsc src/*.ts --declaration --outDir dist && chmod +x dist/cli.js",
+    "format": "prettier src/*.ts test.js --write",
     "test": "tape test.js"
   },
   "keywords": [],
