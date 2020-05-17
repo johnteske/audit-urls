@@ -1,6 +1,10 @@
-# check-urls
+# audit-urls
 
-## Usage:
+```
+Usage: audit-urls [options]
 
-### stdin
-`# echo "http://johnteskemusic.com invalid_url" | check-urls`
+Options:
+  -V, --version  output the version number
+  -v, --verbose  display all url statuses
+  -h, --help     display help for command
+```
