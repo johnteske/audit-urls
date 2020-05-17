@@ -1,25 +1,26 @@
 {
   "name": "audit-urls",
-  "version": "0.0.1",
-  "description": "audit url statuses, including https availability",
+  "version": "0.1.0",
+  "description": "audit url statuses from Node or the command line",
   "main": "dist/index.js",
   "bin": {
-    "check-urls": "./dist/cli.js"
+    "audit-urls": "./dist/cli.js"
   },
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc src/*.ts --declaration --outDir dist && chmod +x dist/cli.js",
+    "build": "rm -rf dist && tsc src/*.ts --declaration --outDir dist && chmod +x dist/cli.js",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
-    "format": "prettier src/*.ts test.js --write",
-    "test": "tape test.js"
+    "format": "prettier src test --write",
+    "test": "tape test/*.js"
   },
   "keywords": [],
   "author": "John Teske",
   "license": "MIT",
   "dependencies": {
+    "commander": "^5.1.0",
     "got": "^11.1.3"
   },
   "devDependencies": {

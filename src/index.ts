@@ -1,11 +1,6 @@
 import got from "got";
 
-const options = {
-  timeout: 3000,
-  retry: 0,
-};
-
-type LinkStatus = {
+export type LinkStatus = {
   url: string;
   error?: string;
   status?: number;
@@ -13,7 +8,12 @@ type LinkStatus = {
   https?: "available" | "no";
 };
 
-export async function getStatus(url) {
+const options = {
+  timeout: 3000,
+  retry: 0,
+};
+
+export default async function getStatus(url): Promise<LinkStatus> {
   const isHttps = url.startsWith("https");
 
   let response;
@@ -43,19 +43,4 @@ export async function getStatus(url) {
   };
 }
 
-function formatStatus(v: LinkStatus) {
-  const { url } = v;
-  const msgs = ["error", "status", "https", "redirect"]
-    .filter((key) => v[key] != null)
-    .map((key) =>
-      key === "redirect"
-        ? v.redirect.map((r) => `redirect: ${r}`).join("\n\t")
-        : `${key}: ${v[key]}`
-    );
-  console.log([url, ...msgs].join("\n\t"));
-}
-
-export default (links) =>
-  Promise.all(links.map(getStatus)).then((statuses) => {
-    statuses.forEach(formatStatus);
-  });
+export const getAllStatuses = (links) => Promise.all(links.map(getStatus));
