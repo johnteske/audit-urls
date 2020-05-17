@@ -2,7 +2,7 @@
 import { program } from "commander";
 import * as filter from "./filter";
 import getStdin from "./get-stdin";
-import getStatus, { LinkStatus } from "./index";
+import { getAllStatuses, LinkStatus } from "./index";
 
 const { name, version } = require("../package.json");
 
@@ -34,7 +34,7 @@ function formatStatus(v: LinkStatus) {
 (async () => {
   const stdin = await getStdin();
   const links = stdin.split(/\s/).filter(Boolean);
-  await Promise.all(links.map(getStatus)).then((statuses) => {
+  await getAllStatuses(links).then((statuses) => {
     statuses.filter(filterResults).forEach(formatStatus);
   });
 })();

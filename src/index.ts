@@ -42,3 +42,5 @@ export default async function getStatus(url): Promise<LinkStatus> {
     https,
   };
 }
+
+export const getAllStatuses = (links) => Promise.all(links.map(getStatus));

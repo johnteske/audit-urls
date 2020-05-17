@@ -13,8 +13,8 @@
     "build": "rm -rf dist && tsc src/*.ts --declaration --outDir dist && chmod +x dist/cli.js",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
-    "format": "prettier src/*.ts test.js --write",
-    "test": "tape test.js"
+    "format": "prettier src test --write",
+    "test": "tape test/*.js"
   },
   "keywords": [],
   "author": "John Teske",

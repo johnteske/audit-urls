@@ -1,0 +1,9 @@
+{
+  "urls": {
+    "ok": "https://johnteskemusic.com",
+    "https": "http://johnteskemusic.com",
+    "notFound": "https://johnteskemusic.com/about.php",
+    "error": "https://hopefully-not-a-real-site.com",
+    "invalid": "invalid url"
+  }
+}
