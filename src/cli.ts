@@ -5,11 +5,17 @@ import getStdin from "./get-stdin";
 import getStatus, { LinkStatus } from "./index";
 
 const { name, version } = require("../package.json");
+
 program
   .name(name)
   .version(version)
-  .option("-v, --verbose", "display all url statuses");
-program.parse(process.argv);
+  .description("Get url status(es) and print on the standard output")
+  .option("-v, --verbose", "display all url statuses")
+  .on("--help", () => {
+    console.log("\nExample:");
+    console.log('  echo "https://johnteskemusic.com invalid_url | audit-urls"');
+  })
+  .parse(process.argv);
 
 const filterResults = program.verbose ? filter.none : filter.notOk;
 

@@ -1,7 +1,7 @@
 {
   "name": "audit-urls",
   "version": "0.1.0",
-  "description": "audit url statuses, including https availability",
+  "description": "audit url statuses from Node or the command line",
   "main": "dist/index.js",
   "bin": {
     "audit-urls": "./dist/cli.js"
