@@ -55,7 +55,11 @@ function formatStatus(v: LinkStatus) {
   console.log([url, ...msgs].join("\n\t"));
 }
 
+function filterResults(v: LinkStatus) {
+  return v.error != null || v.redirect != null || v.https === "available";
+}
+
 export default (links) =>
   Promise.all(links.map(getStatus)).then((statuses) => {
-    statuses.forEach(formatStatus);
+    statuses.filter(filterResults).forEach(formatStatus);
   });
