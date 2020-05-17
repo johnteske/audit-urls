@@ -1,7 +1,7 @@
 const test = require("tape-promise/tape");
 const { exec } = require("child_process");
 
-const { getStatus } = require("./dist");
+const { default: getStatus } = require("./dist");
 
 const urls = {
   ok: "https://johnteskemusic.com",
@@ -44,6 +44,19 @@ test("command line output", (t) => {
     t.equal(
       stdout,
       "http://johnteskemusic.com\n\tstatus: 200\n\thttps: available\n\tredirect: https://johnteskemusic.com/\nhttps://hopefully-not-a-real-site.com\n\terror: ECONNREFUSED\ninvalid\n\terror: ERR_INVALID_URL\nurl\n\terror: ERR_INVALID_URL\n"
+    );
+    t.end();
+  });
+});
+
+test("command line output, verbose", (t) => {
+  t.plan(1);
+  const _urls = Object.values(urls).join(" ");
+  exec(`echo ${_urls} | node dist/cli.js -v`, (_err, stdout) => {
+    t.equal(
+      stdout,
+
+      "https://johnteskemusic.com\n\tstatus: 200\nhttp://johnteskemusic.com\n\tstatus: 200\n\thttps: available\n\tredirect: https://johnteskemusic.com/\nhttps://johnteskemusic.com/about.php\n\tstatus: 404\nhttps://hopefully-not-a-real-site.com\n\terror: ECONNREFUSED\ninvalid\n\terror: ERR_INVALID_URL\nurl\n\terror: ERR_INVALID_URL\n"
     );
     t.end();
   });
