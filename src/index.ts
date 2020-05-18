@@ -43,4 +43,5 @@ export default async function getStatus(url): Promise<LinkStatus> {
   };
 }
 
-export const getAllStatuses = (links): Promise<LinkStatus[]> => Promise.all(links.map(getStatus));
+export const getAllStatuses = (links): Promise<LinkStatus[]> =>
+  Promise.all(links.map(getStatus));

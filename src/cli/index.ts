@@ -2,7 +2,9 @@
 import { program } from "commander";
 const { name, version } = require("../../package.json");
 import * as filter from "../filter";
+import format from "./format";
 import { getIt } from "./get-stdin";
+import { getOne } from "./stream-file";
 
 program
   .name(name)
@@ -29,13 +31,16 @@ switch (files.length) {
     inputMethod = "file";
 }
 
-if (inputMethod === "file") {
-  console.error("not yet supported");
-  process.exit(1);
-}
+const outputFilter = program.verbose ? filter.none : filter.notOk;
+const thing = inputMethod === "stdin" ? getIt : getOne;
 
-const filterResults = program.verbose ? filter.none : filter.notOk;
-
-(async () => {
-  await getIt(filterResults);
+(async (): Promise<void> => {
+  await thing(files).then((statuses) => {
+    statuses
+      .filter(outputFilter)
+      .map(format)
+      .forEach((v) => {
+        console.log(v);
+      });
+  });
 })();

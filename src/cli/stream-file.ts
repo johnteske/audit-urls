@@ -1,6 +1,11 @@
 import * as fs from "fs";
+import { getAllStatuses, LinkStatus } from "../index";
 
-export async function getFile(readable) {
+function read(filename) {
+  return fs.createReadStream(filename, { encoding: "utf8" });
+}
+
+async function getFile(readable): Promise<string> {
   let data = "";
 
   for await (const chunk of readable) {
@@ -10,6 +15,9 @@ export async function getFile(readable) {
   return data;
 }
 
-export async function readAll(files) {
-  //return Promise.all(files.map(getStatus));
+export async function getOne(files): Promise<LinkStatus[]> {
+  const stream = read(files[0]); // TODO
+  const file = await getFile(stream); // TODO
+  const links = file.split(/\n/).filter(Boolean);
+  return getAllStatuses(links);
 }

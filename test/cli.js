@@ -22,7 +22,7 @@ test("uses stdin with '-' arg", async (t) => {
   });
 });
 
-test.skip("uses file with 1 or more args", async (t) => {
+test("uses file with 1 or more args", async (t) => {
   t.plan(2);
   exec(`${CLI} file1 file2`, (err, stdout, stderr) => {
     t.error(err, "err");

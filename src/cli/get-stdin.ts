@@ -1,5 +1,4 @@
-import { getAllStatuses } from "../index";
-import format from "./format";
+import { getAllStatuses, LinkStatus } from "../index";
 
 async function getStdin(): Promise<string> {
   let data = "";
@@ -12,15 +11,8 @@ async function getStdin(): Promise<string> {
   return data;
 }
 
-export async function getIt(filterFn): Promise<void> {
+export async function getIt(): Promise<LinkStatus[]> {
   const stdin = await getStdin();
   const links = stdin.split(/\s/).filter(Boolean);
-  await getAllStatuses(links).then((statuses) => {
-    statuses
-      .filter(filterFn)
-      .map(format)
-      .forEach((v) => {
-        console.log(v);
-      });
-  });
+  return getAllStatuses(links);
 }
