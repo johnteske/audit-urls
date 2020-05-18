@@ -17,21 +17,16 @@ program
 
 const files = program.args;
 
-let inputMethod: "stdin" | "file" = "stdin";
-
-if (files.length > 1) {
-  console.log("> 1");
-  inputMethod = "file";
-} else if (files.length === 1 && files[0] === "-") {
-  console.log("is 1");
-  inputMethod = "stdin";
-} else if (files.length === 1) {
-  console.log("is 1");
-  inputMethod = "file";
-} else {
-  // redundant with default
-  console.log("else");
-  inputMethod = "stdin";
+let inputMethod: "stdin" | "file";
+switch (files.length) {
+  case 0:
+    inputMethod = "stdin";
+    break;
+  case 1:
+    inputMethod = files[0] === "-" ? "stdin" : "file";
+    break;
+  default:
+    inputMethod = "file";
 }
 
 if (inputMethod === "file") {
