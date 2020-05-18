@@ -4,13 +4,14 @@
   "description": "audit url statuses from Node or the command line",
   "main": "dist/index.js",
   "bin": {
-    "audit-urls": "./dist/cli.js"
+    "audit-urls": "./dist/cli/index.js"
   },
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc src/*.ts --declaration --outDir dist && chmod +x dist/cli.js",
+    "build": "rm -rf dist && tsc src/**/*.ts --declaration --outDir dist && chmod +x dist/cli/index.js",
+    "lint": "eslint src/**/*.ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "format": "prettier src test --write",
