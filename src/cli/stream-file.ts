@@ -1,7 +1,8 @@
 import * as fs from "fs";
+import { Readable } from "stream";
 import { getAllStatuses, LinkStatus } from "../index";
 
-function read(filename) {
+function read(filename): Readable {
   return fs
     .createReadStream(filename, { encoding: "utf8" })
     .on("error", (err) => {
