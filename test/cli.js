@@ -1,4 +1,6 @@
 const { exec } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 const test = require("tape-promise/tape");
 const { urls } = require("./data");
 
@@ -22,9 +24,15 @@ test("uses stdin with '-' arg", async (t) => {
   });
 });
 
+const relative = (f) => path.resolve(__dirname, f);
+//const { urls }  = fs.readFileSync(relative("data.json"), { encoding: "utf8" });
+fs.writeFileSync(relative("data.txt"), Object.values(urls).join("\n"), {
+  encoding: "utf8",
+});
+
 test("uses file with 1 or more args", async (t) => {
   t.plan(2);
-  exec(`${CLI} file1 file2`, (err, stdout, stderr) => {
+  exec(`${CLI} test/data.txt`, (err, stdout, stderr) => {
     t.error(err, "err");
     t.error(stderr, "stderr");
     t.end();

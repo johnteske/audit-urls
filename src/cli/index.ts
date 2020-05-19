@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 import { program } from "commander";
-const { name, version } = require("../../package.json");
+import * as fs from "fs";
+import * as path from "path";
 import * as filter from "../filter";
 import format from "./format";
 import { getIt } from "./get-stdin";
 import { getOne } from "./stream-file";
+
+const { name, version } = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "../../package.json"), "utf8")
+);
 
 program
   .name(name)

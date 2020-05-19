@@ -2,7 +2,11 @@ import * as fs from "fs";
 import { getAllStatuses, LinkStatus } from "../index";
 
 function read(filename) {
-  return fs.createReadStream(filename, { encoding: "utf8" });
+  return fs
+    .createReadStream(filename, { encoding: "utf8" })
+    .on("error", (err) => {
+      throw err;
+    });
 }
 
 async function getFile(readable): Promise<string> {
