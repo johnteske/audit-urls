@@ -24,9 +24,13 @@ test("uses stdin with '-' arg", async (t) => {
   });
 });
 
-fs.writeFileSync(path.resolve(__dirname, "data.txt"), Object.values(urls).join("\n"), {
-  encoding: "utf8",
-});
+fs.writeFileSync(
+  path.resolve(__dirname, "data.txt"),
+  Object.values(urls).join("\n"),
+  {
+    encoding: "utf8",
+  }
+);
 
 test("uses file with 1 or more args", async (t) => {
   t.plan(2);

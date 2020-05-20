@@ -11,7 +11,7 @@ async function getStdin(): Promise<string> {
   return data;
 }
 
-export async function getIt(): Promise<LinkStatus[]> {
+export default async function (): Promise<LinkStatus[]> {
   const stdin = await getStdin();
   const links = stdin.split(/\s/).filter(Boolean);
   return getAllStatuses(links);

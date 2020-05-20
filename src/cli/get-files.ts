@@ -22,7 +22,7 @@ async function getFile(readable: Readable): Promise<string> {
   return data;
 }
 
-export async function getOne(files: Filename[]): Promise<LinkStatus[]> {
+export default async function (files: Filename[]): Promise<LinkStatus[]> {
   const links: string[][] = await Promise.all(
     files.map(
       async (f): Promise<string[]> => {

@@ -4,8 +4,8 @@ import * as fs from "fs";
 import * as path from "path";
 import * as filter from "../filter";
 import format from "./format";
-import { getIt } from "./get-stdin";
-import { getOne } from "./stream-file";
+import getFiles from "./get-files";
+import getStdin from "./get-stdin";
 
 const { name, version } = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "../../package.json"), "utf8")
@@ -37,10 +37,10 @@ switch (files.length) {
 }
 
 const outputFilter = program.verbose ? filter.none : filter.notOk;
-const thing = inputMethod === "stdin" ? getIt : getOne;
+const inputFn = inputMethod === "stdin" ? getStdin : getFiles;
 
 (async (): Promise<void> => {
-  await thing(files).then((statuses) => {
+  await inputFn(files).then((statuses) => {
     statuses
       .filter(outputFilter)
       .map(format)
