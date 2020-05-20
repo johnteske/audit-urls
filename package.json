@@ -10,7 +10,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc src/**/*.ts --declaration --outDir dist && chmod +x dist/cli/index.js",
+    "build": "rm -rf dist && tsc -p . && chmod +x dist/cli/index.js",
     "lint": "eslint src --ext ts",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",

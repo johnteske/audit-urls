@@ -1,6 +1,6 @@
 import { LinkStatus } from "./index";
 
-export const none = (v): boolean => v;
+export const none = (): true => true;
 
 export const notOk = (v: LinkStatus): boolean =>
   v.status !== 200 ||
