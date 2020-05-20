@@ -1,6 +1,7 @@
 import got from "got";
 
 type Url = string;
+
 enum Https {
   Available = "available",
   NotAvailable = "no",
@@ -20,22 +21,19 @@ const options = {
 };
 
 export default async function getStatus(url: Url): Promise<LinkStatus> {
-  const isHttps = url.startsWith("https");
-
   let response;
   try {
     response = await got(url, options);
   } catch (err) {
-    const _error = err.response == null ? err.code : null;
     return {
       url,
-      error: _error,
+      error: err.response == null ? err.code : null,
       status: err.response?.statusCode,
     };
   }
 
   let https = null;
-  if (!isHttps) {
+  if (!url.startsWith("https")) {
     https = await got(url.replace("http://", "https://"), options)
       .then(() => Https.Available)
       .catch(() => Https.NotAvailable);
