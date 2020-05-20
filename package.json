@@ -6,6 +6,9 @@
   "bin": {
     "audit-urls": "./dist/cli/index.js"
   },
+  "files": [
+    "/dist"
+  ],
   "engines": {
     "node": ">=10"
   },
