@@ -2,16 +2,18 @@
   "name": "audit-urls",
   "version": "0.2.0",
   "description": "audit url statuses from Node or the command line",
-  "main": "dist/index.js",
-  "bin": {
-    "audit-urls": "./dist/cli/index.js"
-  },
+  "keywords": [
+    "audit",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "John Teske",
   "files": [
     "/dist"
   ],
-  "engines": {
-    "node": ">=10"
-  },
+  "main": "dist/index.js",
+  "bin": "./dist/cli/index.js",
+  "repository": "github:johnteske/audit-urls",
   "scripts": {
     "build": "rm -rf dist && tsc -p . && chmod +x dist/cli/index.js",
     "lint": "eslint src --ext ts",
@@ -20,12 +22,6 @@
     "format": "prettier . --ignore-path .gitignore --write",
     "test": "tape test/*.js"
   },
-  "keywords": [
-    "audit",
-    "cli"
-  ],
-  "author": "John Teske",
-  "license": "MIT",
   "dependencies": {
     "commander": "^5.1.0",
     "got": "^11.1.3"
@@ -39,5 +35,8 @@
     "tape": "^5.0.0",
     "tape-promise": "^4.0.0",
     "typescript": "^3.9.2"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
