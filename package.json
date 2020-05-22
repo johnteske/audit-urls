@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "rm -rf dist && tsc src/*.ts --declaration --outDir dist && chmod +x dist/cli.js",
+    "readme": "node templates/README.js > README.md",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "format": "prettier src test --write",

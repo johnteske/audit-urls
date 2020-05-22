@@ -1,6 +1,7 @@
 # audit-urls
 
 ## cli
+
 ```
 Usage: audit-urls [options]
 
@@ -13,4 +14,5 @@ Options:
 
 Example:
   echo "https://johnteskemusic.com invalid_url | audit-urls"
+
 ```
