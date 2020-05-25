@@ -16,7 +16,7 @@ program
   .version(version)
   .description("Get url status(es) and print on the standard output")
   .option("-v, --verbose", "display all url statuses")
-  .on("--help", () => {
+  .on("-h, --help", () => {
     console.log("\nExample:");
     console.log('  echo "https://johnteskemusic.com invalid_url | audit-urls"');
   })
@@ -40,12 +40,12 @@ const outputFilter = program.verbose ? filter.none : filter.notOk;
 const inputFn = inputMethod === "stdin" ? getStdin : getFiles;
 
 (async (): Promise<void> => {
-  await inputFn(files).then((statuses) => {
-    statuses
-      .filter(outputFilter)
-      .map(format)
-      .forEach((v) => {
-        console.log(v);
-      });
-  });
+  const statuses = await inputFn(files);
+  statuses
+    .filter(outputFilter)
+    .map(format)
+    .forEach((v) => {
+      console.log(v);
+    });
+  process.exit(statuses.some(filter.notOk) ? 1 : 0);
 })();
