@@ -1,11 +1,18 @@
 import got from "got";
 
+type Url = string;
+
+enum Https {
+  Available = "available",
+  NotAvailable = "no",
+}
+
 export type LinkStatus = {
-  url: string;
+  url: Url;
   error?: string;
   status?: number;
   redirect?: string[];
-  https?: "available" | "no";
+  https?: Https;
 };
 
 const options = {
@@ -13,26 +20,23 @@ const options = {
   retry: 0,
 };
 
-export default async function getStatus(url): Promise<LinkStatus> {
-  const isHttps = url.startsWith("https");
-
+export default async function getStatus(url: Url): Promise<LinkStatus> {
   let response;
   try {
     response = await got(url, options);
   } catch (err) {
-    const _error = err.response == null ? err.code : null;
     return {
       url,
-      error: _error,
+      error: err.response == null ? err.code : null,
       status: err.response?.statusCode,
     };
   }
 
   let https = null;
-  if (!isHttps) {
+  if (!url.startsWith("https")) {
     https = await got(url.replace("http://", "https://"), options)
-      .then(() => "available")
-      .catch(() => "no");
+      .then(() => Https.Available)
+      .catch(() => Https.NotAvailable);
   }
 
   return {
@@ -43,4 +47,5 @@ export default async function getStatus(url): Promise<LinkStatus> {
   };
 }
 
-export const getAllStatuses = (links) => Promise.all(links.map(getStatus));
+export const getAllStatuses = (links: Url[]): Promise<LinkStatus[]> =>
+  Promise.all(links.map(getStatus));

@@ -4,7 +4,7 @@ const exec = util.promisify(require("child_process").exec);
 const CODE_BLOCK = "```";
 
 (async () => {
-  const { stdout, stderr } = await exec("node dist/cli.js -h");
+  const { stdout, stderr } = await exec("node dist/cli -h");
   if (stderr) {
     throw stderr;
   }

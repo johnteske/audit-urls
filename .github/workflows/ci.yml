@@ -2,17 +2,17 @@ name: ci
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: test
-      run: |
-        npm ci
-        npm run build
-        npm test
+      - uses: actions/checkout@v2
+      - name: test
+        run: |
+          npm ci
+          npm run build
+          npm test
