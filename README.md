@@ -14,4 +14,5 @@ Options:
 
 Example:
   echo "https://johnteskemusic.com invalid_url | audit-urls"
+
 ```

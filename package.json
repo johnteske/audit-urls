@@ -17,6 +17,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p . && chmod +x dist/cli/index.js",
     "lint": "eslint src --ext ts",
+    "readme": "node templates/README.js > README.md",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "format": "prettier . --ignore-path .gitignore --write",
