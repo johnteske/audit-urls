@@ -18,8 +18,8 @@ const testOk = (cmd) => (t) => {
 const testErr = (cmd) => (t) => {
   t.plan(2);
   exec(cmd, (err, stdout, stderr) => {
-    t.assert(err, t.name + ">err"); // should it be this?
-    t.error(stderr, t.name + ">stderr"); // and should I be writing to stderr?
+    t.assert(err, t.name + ">err");
+    t.assert(stderr, t.name + ">stderr");
     t.end();
   });
 };
@@ -43,14 +43,9 @@ fs.writeFileSync(
     encoding: "utf8",
   }
 );
-fs.writeFileSync(
-  path.resolve(__dirname, "ok.txt"),
-  urls.ok,
-  //Object.values(urls).join("\n"),
-  {
-    encoding: "utf8",
-  }
-);
+fs.writeFileSync(path.resolve(__dirname, "ok.txt"), urls.ok, {
+  encoding: "utf8",
+});
 
 test("uses file with 1 or more args", (t) => {
   t.plan(3);

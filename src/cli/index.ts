@@ -47,5 +47,11 @@ const inputFn = inputMethod === "stdin" ? getStdin : getFiles;
     .forEach((v) => {
       console.log(v);
     });
-  process.exit(statuses.some(filter.notOk) ? 1 : 0);
+
+  const fails = statuses.filter(filter.notOk).length;
+  if (fails > 0) {
+    console.error("%s url(s) had issues", fails);
+    process.exit(1);
+  }
+  process.exit(0);
 })();
