@@ -1,6 +1,6 @@
 {
   "name": "audit-urls",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "audit url statuses from Node or the command line",
   "keywords": [
     "audit",

@@ -8,7 +8,8 @@ function read(filename: Filename): Readable {
   return fs
     .createReadStream(filename, { encoding: "utf8" })
     .on("error", (err) => {
-      throw err;
+      console.error(err.message);
+      process.exit(1);
     });
 }
 
