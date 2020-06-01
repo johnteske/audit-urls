@@ -3,16 +3,20 @@
 ## cli
 
 ```
-Usage: audit-urls [options]
+Usage: audit-urls audit-urls [option]... [file]...
+  With no file(s), or when file is -, read standard input.
 
-Get url status(es) and print on the standard output
+Get and display url status(es) to standard output.
 
 Options:
   -V, --version  output the version number
   -v, --verbose  display all url statuses
   -h, --help     display help for command
 
-Example:
-  echo "https://johnteskemusic.com invalid_url | audit-urls"
+Examples:
+  audit-urls urls1.txt urls2.txt
+  echo "https://johnteskemusic.com invalid_url" | audit-urls
+  echo "https://johnteskemusic.com invalid_url" | audit-urls -
+
 
 ```

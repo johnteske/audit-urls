@@ -14,11 +14,19 @@ const { name, version } = JSON.parse(
 program
   .name(name)
   .version(version)
-  .description("Get url status(es) and print on the standard output")
+  .description("Get and display url status(es) to standard output.")
   .option("-v, --verbose", "display all url statuses")
-  .on("-h, --help", () => {
-    console.log("\nExample:");
-    console.log('  echo "https://johnteskemusic.com invalid_url | audit-urls"');
+  .usage(
+    `${name} [option]... [file]...
+  With no file(s), or when file is -, read standard input.`
+  )
+  .on("--help", () => {
+    console.log(`
+Examples:
+  audit-urls urls1.txt urls2.txt
+  echo "https://johnteskemusic.com invalid_url" | audit-urls
+  echo "https://johnteskemusic.com invalid_url" | audit-urls -
+`);
   })
   .parse(process.argv);
 
