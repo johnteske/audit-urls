@@ -14,8 +14,7 @@ const CODE_BLOCK = "```";
 ## cli
 
 ${CODE_BLOCK}
-${stdout}
-${CODE_BLOCK}
+${stdout}${CODE_BLOCK}
 `;
 
   process.stdout.write(out);

@@ -18,5 +18,4 @@ Examples:
   echo "https://johnteskemusic.com invalid_url" | audit-urls
   echo "https://johnteskemusic.com invalid_url" | audit-urls -
 
-
 ```
