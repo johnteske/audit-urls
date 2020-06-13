@@ -2,10 +2,7 @@
   "name": "audit-urls",
   "version": "0.3.1",
   "description": "audit url statuses from Node or the command line",
-  "keywords": [
-    "audit",
-    "cli"
-  ],
+  "keywords": [],
   "license": "MIT",
   "author": "John Teske",
   "files": [
@@ -39,5 +36,6 @@
   },
   "engines": {
     "node": ">=10"
-  }
+  },
+  "homepage": ""
 }
